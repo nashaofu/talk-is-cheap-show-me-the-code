@@ -8,9 +8,9 @@ node_js:
 matrix:
   include:
     - os: linux
-    env: TARGET=deb
+      env: TARGET=deb
     - os: osx
-    env: TARGET=osx
+      env: TARGET=osx
 
 script:
   - npm start
