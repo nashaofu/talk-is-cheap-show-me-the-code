@@ -8,8 +8,6 @@ node_js:
 matrix:
   include:
     - os: linux
-    env: TARGET=rpm
-    - os: linux
     env: TARGET=deb
     - os: osx
     env: TARGET=osx
