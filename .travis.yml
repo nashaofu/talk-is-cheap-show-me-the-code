@@ -15,6 +15,7 @@ matrix:
     env: TARGET=osx
 
 script:
+  - npm start
   - node index.js
 
 branches:
