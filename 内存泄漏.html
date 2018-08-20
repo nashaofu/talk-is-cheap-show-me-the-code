@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>内存泄漏研究</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div id="nodes"></div>
+  <script>
+    var theThing = null;
+    var replaceThing = function () {
+      var originalThing = theThing;
+      var unused = function () {
+        if (originalThing)
+          console.log("hi");
+      };
+      theThing = {
+        longStr: new Array(1000000).join('*'),
+        someMethod: function () {
+          console.log(someMessage);
+        }
+      };
+    };
+    setInterval(replaceThing, 1000);
+  </script>
+</body>
+</html>
