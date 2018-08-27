@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/nashaofu/talk-is-cheap-show-me-the-code/issues"
   },
-  "homepage": "https://github.com/nashaofu/talk-is-cheap-show-me-the-code#readme"
+  "homepage": "https://github.com/nashaofu/talk-is-cheap-show-me-the-code#readme",
+  "dependencies": {
+    "co": "^4.6.0"
+  }
 }
