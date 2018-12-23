@@ -1,2 +1,2 @@
 // require('./resolveOnce')
-require('./thunkify/co')
+require('./co')

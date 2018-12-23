@@ -1,3 +1,6 @@
+/**
+ * 乘法函数柯里化
+ */
 function multi() {
   var args = Array.prototype.slice.call(arguments)
   var fn = function() {

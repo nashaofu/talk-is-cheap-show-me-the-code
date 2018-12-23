@@ -1,3 +1,7 @@
+/**
+ * 循环引用深拷贝
+ * @param {*} x
+ */
 function cloneLoop(x) {
   const root = {}
 
@@ -42,7 +46,10 @@ function cloneLoop(x) {
   return root
 }
 
-// 保持引用关系
+/**
+ * 保持引用关系
+ * @param {*} x
+ */
 function cloneForce(x) {
   // =============
   const uniqueList = [] // 用来去重
