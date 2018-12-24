@@ -29,3 +29,11 @@ target_link_libraries(cmakedemo Math)
 set(CMAKE_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
+
+# 构建一个 CPack 安装包
+include (InstallRequiredSystemLibraries)
+# set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_PACKAGE_VERSION_MAJOR "${cmakedemo_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${cmakedemo_VERSION_MINOR}")
+include (CPack)
