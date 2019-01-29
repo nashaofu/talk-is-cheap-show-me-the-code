@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="cube.js"></script>
+    <script src="renderer.js"></script>
+    <script>
+      var cube = new Cube({ x: 0, y: 0, z: 0, size: window.innerWidth / 3 })
+      var renderer = new Renderer({ width: window.innerWidth, height: window.innerHeight })
+      document.body.appendChild(renderer.dom)
+
+      // Rotate a vertice
+      function rotate(M, center, theta, phi) {
+        // Rotation matrix coefficients
+        var ct = Math.cos(theta)
+        var st = Math.sin(theta)
+        var cp = Math.cos(phi)
+        var sp = Math.sin(phi)
+
+        // Rotation
+        var x = M.x - center.x
+        var y = M.y - center.y
+        var z = M.z - center.z
+
+        M.x = ct * x - st * cp * y + st * sp * z + center.x
+        M.y = st * x + ct * cp * y - ct * sp * z + center.y
+        M.z = sp * y + cp * z + center.z
+      }
+      let speed = 0
+      let flag = 1
+      function render() {
+        for (var i = 0; i < 8; ++i) {
+          cube.rotate(-Math.PI / (speed + 3000), Math.PI / (speed + 3200))
+        }
+        speed += flag * 10
+        if (speed >= 4800 || speed <= 0) flag = -1 * flag
+        renderer.render(cube)
+        requestAnimationFrame(render)
+      }
+      render()
+    </script>
+  </body>
+</html>

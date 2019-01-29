@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="cnv" width="800" height="600"></canvas>
+    <script src="js.js"></script>
+    <script>
+      ;(function() {
+        // Fix the canvas width and height
+        var canvas = document.getElementById('cnv')
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        // canvas.width = canvas.offsetWidth
+        // canvas.height = canvas.offsetHeight
+        var dx = canvas.width / 2
+        var dy = canvas.height / 2
+
+        // Objects style
+        var ctx = canvas.getContext('2d')
+        console.log(ctx)
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)'
+        ctx.fillStyle = 'rgba(0, 150, 255, 0.3)'
+
+        // Create the cube
+        var cube_center = new Vertex(0, (11 * dy) / 10, 0)
+        var cube = new Cube(cube_center, dy)
+        var objects = [cube]
+        console.log(cube)
+
+        // Events
+        var mousedown = false
+        var mx = 0
+        var my = 0
+
+        canvas.addEventListener('mousedown', initMove)
+        document.addEventListener('mousemove', move)
+        document.addEventListener('mouseup', stopMove)
+        // Initialize the movement
+        function initMove(evt) {
+          // clearTimeout(autorotate_timeout)
+          mousedown = true
+          mx = evt.clientX
+          my = evt.clientY
+        }
+
+        function move(evt) {
+          if (mousedown) {
+            var theta = ((evt.clientX - mx) * Math.PI) / 360
+            var phi = ((evt.clientY - my) * Math.PI) / 180
+
+            for (var i = 0; i < 8; ++i) rotate(cube.vertices[i], cube_center, theta, phi)
+
+            mx = evt.clientX
+            my = evt.clientY
+
+            render(objects, ctx, dx, dy)
+          }
+        }
+
+        function stopMove() {
+          mousedown = false
+        }
+
+        // Rotate a vertice
+        function rotate(M, center, theta, phi) {
+          // Rotation matrix coefficients
+          var ct = Math.cos(theta)
+          var st = Math.sin(theta)
+          var cp = Math.cos(phi)
+          var sp = Math.sin(phi)
+
+          // Rotation
+          var x = M.x - center.x
+          var y = M.y - center.y
+          var z = M.z - center.z
+
+          M.x = ct * x - st * cp * y + st * sp * z + center.x
+          M.y = st * x + ct * cp * y - ct * sp * z + center.y
+          M.z = sp * y + cp * z + center.z
+        }
+
+        function autorotate() {
+          for (var i = 0; i < 8; ++i) rotate(cube.vertices[i], cube_center, -Math.PI / 720, Math.PI / 720)
+        }
+        renderCub()
+
+        function renderCub() {
+          autorotate()
+          render(objects, ctx, dx, dy)
+          requestAnimationFrame(renderCub)
+        }
+      })()
+    </script>
+  </body>
+</html>
