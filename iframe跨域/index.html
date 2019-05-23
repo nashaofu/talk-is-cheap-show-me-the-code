@@ -26,7 +26,8 @@
       }
       window.addEventListener(
         'message',
-        () => {
+        (e) => {
+          console.log(e)
           document.body.removeChild($iframe)
         },
         false
