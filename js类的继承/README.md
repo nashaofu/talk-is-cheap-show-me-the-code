@@ -53,10 +53,12 @@ B.prototype.b = function() {
 }
 B.prototype.__proto__ = A.prototype
 B.__proto__ = A
-
-const b = B.call({})
+// 先执行原型赋值，保证 b instanceof B 成立
 b.__proto__ = B.prototype
+const b = B.call({})
 ```
+
+instanceof 与 isPrototypeOf 的区别
 
 ```js
 b instanceof B // b.__proto__ === B.prototype 一直查找__proto__是否为B.prototype
