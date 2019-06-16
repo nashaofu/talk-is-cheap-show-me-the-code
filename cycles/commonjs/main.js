@@ -1,3 +1,4 @@
+// main.js
 console.log('main starting')
 const a = require('./a.js')
 const b = require('./b.js')

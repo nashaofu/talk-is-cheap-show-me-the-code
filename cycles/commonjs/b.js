@@ -1,3 +1,4 @@
+// b.js
 console.log('b starting')
 exports.done = false
 const a = require('./a.js')
