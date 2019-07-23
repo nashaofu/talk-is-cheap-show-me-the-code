@@ -1,40 +1,18 @@
 # talk-is-cheap-show-me-the-code
+
 专治各种疑难杂症的仓库
 
-```bash
-.
-├── LICENSE
-├── README.md
-├── clone # js clone
-│   ├── deep.js
-│   ├── index.html
-│   └── js.js
-├── currying.js # 函数柯里化
-├── CCpp # C/C++练习
-├── cycles # 循环引用研究
-│   ├── commonjs
-│   │   ├── a.js
-│   │   ├── b.js
-│   │   └── main.js
-│   ├── esmodules
-│   │   ├── a.mjs
-│   │   ├── b.mjs
-│   │   └── main.mjs
-│   └── esmodules2
-│       ├── a.mjs
-│       ├── b.mjs
-│       └── main.mjs
-├── package.json
-├── promise
-│   ├── P.js # 创建P类，继承于Promise，但添加了静态方法
-│   ├── parallelResolveOnce.js # 并行Promise，其中又一个成功则整个任务完成并切整个任务成功
-│   ├── resolveOnce.js  # 串行并行Promise成功一次的演示
-│   └── serialResolveOnce.js  # 串行Promise，直到又一个成功就结束整个进程，并切整个任务成功
-├── thunkify # thunk函数使用
-│   ├── co.js
-│   ├── console.js
-│   ├── readFile.js
-│   └── thunkify.js
-├── utf8.ts # uft8字符与16进制数组互相转换
-└── 内存泄漏.html # 内存泄漏研究
-```
+## 目录
+
+1. [简单的3D渲染引擎](./简单的3D渲染引擎/README.md)
+2. [内存泄漏测试](./内存泄漏测试/index.html)
+3. [拓扑排序](./拓扑排序/README.md)
+4. [CCpp](./CCpp/README.md)
+5. [iframe 跨域](./iframe跨域通信/README.md)
+6. [js克隆](./js克隆/README.md)
+7. [js类的继承](./js类的继承/README.md)
+8. [promise实用封装](./promise实用封装/README.md)
+9. [thunk函数相关知识](./thunk函数相关知识/README.md)
+10. [utf8与bytes互转](./utf8与bytes互转/README.md)
+11. [webpack原理](./webpack原理/README.md)
+    1. [从前端模块化讲起](./webpack原理/从前端模块化讲起/README.md)
