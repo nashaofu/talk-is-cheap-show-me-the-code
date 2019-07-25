@@ -1,6 +1,3 @@
-let c = 12
-
-export { c }
-setTimeout(() => {
-  c = 0
-}, 1000)
+// b.mjs
+import { a } from './a'
+export const b = () => a + 1

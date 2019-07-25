@@ -1,5 +1,4 @@
 // a.mjs
-import { bar } from './b.mjs'
-console.log('a.mjs')
-console.log(bar)
-export let foo = 'foo'
+import { b } from './b'
+export const a = 1
+console.log('A:', b)

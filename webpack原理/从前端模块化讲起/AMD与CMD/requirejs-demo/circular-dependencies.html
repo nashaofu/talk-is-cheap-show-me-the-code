@@ -7,13 +7,15 @@
     <title>circular-dependencies</title>
   </head>
   <body>
+    <h1>循环依赖解决方案，请在控制台中查看</h1>
+    <p>循环依赖解决方案是通过导出函数，在函数中动态的require依赖</p>
     <script src="./js/lib/require.js"></script>
     <script>
       requirejs.config({
         baseUrl: '/js/',
         paths: {
-          a: './a',
-          b: './b'
+          a: './cycles/a',
+          b: './cycles/b'
         }
       })
       require(['a'], a => {

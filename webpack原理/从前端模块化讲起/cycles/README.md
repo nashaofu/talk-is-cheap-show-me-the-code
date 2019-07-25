@@ -10,5 +10,11 @@ nodejs 使用 import 语法必须把 js 文件命名为`*.mjs`
 # commonjs
 node main.js
 # es module
-node --experimental-modules main.mjs
+node --experimental-modules a.mjs
 ```
+
+# 目录说明
+
+- `commonjs`: 循环依赖示例
+- `esmodules`: 循环依赖示例
+- `esmodules2`: 循环依赖解决方案示例

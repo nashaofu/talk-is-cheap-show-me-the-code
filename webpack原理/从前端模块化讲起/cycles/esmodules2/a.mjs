@@ -1,9 +1,5 @@
-import * as b from './b'
+// a.mjs
+import { b } from './b'
+export const a = 1
 
-// c是值引用
-const { c } = b
-console.log(b, c)
-// b是地址引用
-export { c,  b }
-// d是值引用
-export let d = b.c
+console.log('A:', b())
