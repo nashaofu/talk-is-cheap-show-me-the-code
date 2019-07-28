@@ -2,9 +2,9 @@
 
 ## 源码目录
 
-1. [AMD与CMD](./AMD与CMD/README.md)
-2. [cjs和esm导出值的区别](./cjs和esm导出值的区别/README.md)
-2. [cycles](./cycles/README.md)
+1. [AMD 与 CMD](./AMD与CMD/README.md)
+2. [cjs 和 esm 导出值的区别](./cjs和esm导出值的区别/README.md)
+3. [cycles](./cycles/README.md)
 
 ## 当前主流 JS 模块化方案
 
@@ -475,6 +475,8 @@ import './a.mjs'
 - https://github.com/seajs/seajs/issues/277
 - https://github.com/seajs/seajs/issues/242
 - PPT 中示例源码： [talk-is-cheap-show-me-the-code](https://github.com/nashaofu/talk-is-cheap-show-me-the-code/blob/master/webpack%E5%8E%9F%E7%90%86/%E4%BB%8E%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%B2%E8%B5%B7/README.md)，源码示例不完善，仅供参考
+- [PPT 录屏](https://www.bilibili.com/video/av61001656)
+- [PDF 文档](./webpack原理-从前端模块化开始.pdf)
 
 ## 关于作者
 
