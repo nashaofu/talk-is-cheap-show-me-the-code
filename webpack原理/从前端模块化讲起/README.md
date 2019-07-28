@@ -1,6 +1,6 @@
 # Webpack 原理-从前端模块化开始
 
-## 目录
+## 源码目录
 
 1. [AMD与CMD](./AMD与CMD/README.md)
 2. [cjs和esm导出值的区别](./cjs和esm导出值的区别/README.md)
