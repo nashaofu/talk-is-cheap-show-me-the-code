@@ -14,5 +14,3 @@
 8. [promise实用封装](./promise实用封装/README.md)
 9. [thunk函数相关知识](./thunk函数相关知识/README.md)
 10. [utf8与bytes互转](./utf8与bytes互转/README.md)
-11. [webpack原理](./webpack原理/README.md)
-    1. [从前端模块化讲起](./webpack原理/从前端模块化讲起/README.md)
