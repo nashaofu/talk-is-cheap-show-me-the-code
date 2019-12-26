@@ -1,8 +1,1 @@
-*.o
-*.out
-CMakeFiles
-CMakeCache.txt
-Makefile
-*/*.a
-*.cmake
-/_CPack_Packages
+/out
