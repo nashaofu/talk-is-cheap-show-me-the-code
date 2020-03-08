@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .div1,
+      .div2 {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        width: 400px;
+        height: 400px;
+        line-height: 100px;
+        border: 1px solid #000;
+        font-size: 16px;
+        text-align: center;
+      }
+      .div1:hover,
+      .div2:hover {
+        background-color: #000;
+      }
+      .div1 {
+        background-color: rgba(255, 0, 0, 0.6);
+      }
+      .div2 {
+        background-color: rgba(0, 255, 0, 0.6);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div1" style="transform: rotate(30deg) translate(80px,80px);">
+      scale(1.5, 2) translate(50px, 50px)
+    </div>
+    <div class="div2" style="transform: matrix(0.866,0.5,-0.5,0.866,0,0);">
+      translate(50px, 50px) scale(1.5, 2);
+    </div>
+    <button style="z-index:1000">切换变换</button>
+    <script>
+      function multiply(m1, m2) {
+        const m = [0, 0, 0, 0, 0, 0]
+        m[0] = m1[0] * m2[0] + m1[2] * m2[1]
+        m[1] = m1[1] * m2[0] + m1[3] * m2[1]
+
+        m[2] = m1[0] * m2[2] + m1[2] * m2[3]
+        m[3] = m1[1] * m2[2] + m1[3] * m2[3]
+
+        m[4] = m1[0] * m2[4] + m1[2] * m2[5] + m1[4]
+        m[5] = m1[1] * m2[4] + m1[3] * m2[5] + m1[5]
+        return m
+      }
+      class Matrix {
+        matrix = [1, 0, 0, 1, 0, 0]
+        constructor(matrix) {
+          if (matrix) {
+            this.matrix = matrix
+          }
+        }
+        get t() {
+          const [, , , , e, f] = this.matrix
+
+          const radian = -(this.r / 180) * Math.PI
+          return [
+            Math.cos(radian) * e - Math.sin(radian) * f,
+            Math.sin(radian) * e + Math.cos(radian) * f
+          ]
+        }
+
+        get s() {
+          const [a, b, c, d] = this.matrix
+          return [
+            Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)),
+            Math.sqrt(Math.pow(c, 2) + Math.pow(d, 2))
+          ]
+        }
+
+        get r() {
+          const [a, b] = this.matrix
+
+          return (Math.atan2(b, a) / Math.PI) * 180
+        }
+
+        translate([translateX, translateY]) {
+          this.matrix = multiply(this.matrix, [
+            1,
+            0,
+            0,
+            1,
+            translateX,
+            translateY
+          ])
+          if (this.parent) {
+            this.parent.render()
+          }
+          return this
+        }
+
+        scale([scaleX, scaleY]) {
+          this.matrix = multiply(this.matrix, [scaleX, 0, 0, scaleY, 0, 0])
+          if (this.parent) {
+            this.parent.render()
+          }
+          return this
+        }
+
+        rotate(rotate) {
+          const radian = (rotate / 180) * Math.PI
+          this.matrix = multiply(this.matrix, [
+            Math.cos(radian),
+            Math.sin(radian),
+            -Math.sin(radian),
+            Math.cos(radian),
+            0,
+            0
+          ])
+          if (this.parent) {
+            this.parent.render()
+          }
+          return this
+        }
+      }
+
+      const m = new Matrix([0.866, 0.5, -0.5, 0.866, 0, 0])
+
+      document.querySelector('button').addEventListener('click', () => {
+        m.rotate(30)
+        document.querySelector(
+          '.div2'
+        ).style.transform = `matrix(${m.matrix.join(',')})`
+      })
+    </script>
+  </body>
+</html>
