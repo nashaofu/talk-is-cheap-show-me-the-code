@@ -58,7 +58,7 @@ B.__proto__ = A
 let b = {}
 // 先执行原型赋值，保证 b instanceof B 成立
 b.__proto__ = B.prototype
-b = B.call({})
+b = B.call(b)
 ```
 
 instanceof 与 isPrototypeOf 的区别
