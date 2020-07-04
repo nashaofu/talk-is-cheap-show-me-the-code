@@ -6,7 +6,7 @@ es6.js 是 es6 代码的写法，es6Toes5.js 是由 babel 转换后的代码修�
 
 ## 结论
 
-es6 预发
+es6 语法
 
 ```js
 class A {
@@ -53,9 +53,12 @@ B.prototype.b = function() {
 }
 B.prototype.__proto__ = A.prototype
 B.__proto__ = A
+
+// 实例化 B 类，如下代码是new B()的实现
+let b = {}
 // 先执行原型赋值，保证 b instanceof B 成立
 b.__proto__ = B.prototype
-const b = B.call({})
+b = B.call(b)
 ```
 
 instanceof 与 isPrototypeOf 的区别
