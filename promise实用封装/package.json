@@ -1,0 +1,17 @@
+{
+  "name": "diy-promise",
+  "version": "1.0.0",
+  "description": "promise实用封装和Promise实现",
+  "main": "Promise.js",
+  "scripts": {
+    "test": "promises-aplus-tests Promise.js"
+  },
+  "keywords": [
+    "Promise"
+  ],
+  "author": "nashaofu",
+  "license": "ISC",
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  }
+}
