@@ -25,7 +25,7 @@ fs.readFile(path.join(__dirname, './app.html'))
     $('script').each((index, el) => {
       const url = $(el)
         .attr('src')
-        .replace(/(https:\/\/cdn\.bootcdn\.net|https:\/\/cdn\.jsdelivr\.net)/, '')
+        .replace(/(https:\/\/cdn\.bootcdn\.net|https:\/\/cdn\.jsdelivr\.net)/, 'js')
       $(el).attr('src', url)
     })
 
