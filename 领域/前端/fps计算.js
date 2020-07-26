@@ -14,18 +14,15 @@ var lastFameTime = Date.now()
 
 var loop = function () {
   var now = Date.now()
-  var fs = (now - lastFameTime)
-  var fps = Math.round(1000 / fs)
-
   lastFameTime = now
   frame++
 
   if (now > 1000 + lastTime) {
-    fps = Math.round((frame * 1000) / (now - lastTime))
+    var fps = Math.round((frame * 1000) / (now - lastTime))
     div.innerHTML = `${fps}fps`
     frame = 0
     lastTime = now
-  };
+  }
 
   requestAnimationFrame(loop)
 }
