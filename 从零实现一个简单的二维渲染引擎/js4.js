@@ -1,31 +1,19 @@
 // js4.js
-function draw(color) {
-  ctx.beginPath()
-  ctx.fillStyle = color
-  ctx.strokeStyle = color
-  // x:50,y:50,宽100高50的矩形
-  ctx.moveTo(50, 50)
-  ctx.lineTo(150, 50)
-  ctx.lineTo(150, 100)
-  ctx.lineTo(50, 100)
-  ctx.closePath()
-  ctx.stroke()
-  ctx.fill()
-}
+import drawRect from './drawRect.js'
 
 const $canvas = document.querySelector('#canvas')
 $canvas.width = 400
 $canvas.height = 300
 const ctx = $canvas.getContext('2d')
 
-draw('#f00')
+drawRect(ctx, '#f00')
 
 ctx.translate(50, 50)
-draw('#00f')
+drawRect(ctx, '#00f')
 
 let rad = Math.PI / 4
 ctx.rotate(rad)
-draw('#0f0')
+drawRect(ctx, '#0f0')
 
 let sin = Math.sin(rad)
 let cos = Math.cos(rad)
@@ -58,4 +46,4 @@ let dy = y2 - y1
 
 // 在旋转后的坐标系下向x，y方向平移
 ctx.translate(dx, dy)
-draw('rgba(0,0,0,0.6)')
+drawRect(ctx, 'rgba(0,0,0,0.6)')
