@@ -28,16 +28,9 @@ let x1 = x
 let y1 = y
 
 // 在旋转后的坐标中，未旋转矩形的中心位置
-let x2
-
-if ((rad + Math.PI / 2) % Math.PI !== 0) {
-  x2 = y1 * sin - x1 * sin * tan + x1 / cos
-} else {
-  // 90°的奇数倍的角度cos为0
-  // 单独处理一下
-  x2 = y1 * sin
-}
-
+// 90°的奇数倍的角度cos为0
+// 单独处理一下
+let x2 = (rad / Math.PI / 2) % 2 === 0 ? y1 * sin : x1 / cos - x1 * sin * tan + y1 * sin
 let y2 = y1 * cos - x1 * sin
 
 // 在旋转后的坐标中，旋转后的矩形和未旋转矩形的中心的距离在x和y方向的分量
