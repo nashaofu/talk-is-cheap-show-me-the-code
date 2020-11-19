@@ -11,7 +11,7 @@ function partition(arr, lIndex, rIndex) {
     const pivotValue = arr[pivot]
     let index = pivot + 1
     for (let i = index; i <= rIndex; i++) {
-      // 小于 pivotValue 的全部放到前面的小于pivotValue的分区
+      // 小于 pivotValue 的全部放到前面的小于pivotValue的分区，这里注意要与20，21行一起看
       if (pivotValue > arr[i]) {
         swap(arr, i, index)
         index++

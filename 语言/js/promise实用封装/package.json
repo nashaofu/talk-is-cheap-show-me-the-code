@@ -4,7 +4,7 @@
   "description": "promise实用封装和Promise实现",
   "main": "Promise.js",
   "scripts": {
-    "test": "promises-aplus-tests Promise.js"
+    "test": "promises-aplus-tests MyPromise.js"
   },
   "keywords": [
     "Promise"

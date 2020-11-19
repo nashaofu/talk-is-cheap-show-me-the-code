@@ -43,14 +43,22 @@ A.prototype.a = function() {
 }
 
 function B() {
-  const _this = B.__proto__.apply(this, arguments) || this
+  const _this = A.apply(this, arguments) || this
   _this.myB = 'b'
   return _this
 }
 
+function Temp() {}
+
+Temp.prototype = A.prototype
+
+B.prototype = new Temp()
+B.prototype.constructor = B
 B.prototype.b = function() {
   console.log('B-b')
 }
+
+
 B.prototype.__proto__ = A.prototype
 B.__proto__ = A
 
@@ -61,6 +69,34 @@ b.__proto__ = B.prototype
 b = B.call(b)
 ```
 
+```js
+function A() {
+  this.myA = 'a'
+}
+
+A.prototype.a = function() {
+  console.log('A-a')
+}
+
+function B() {
+  const _this = A.apply(this, arguments) || this
+  _this.myB = 'b'
+  return _this
+}
+
+function Temp() {}
+
+Temp.prototype = A.prototype
+
+B.prototype = new Temp()
+B.prototype.constructor = B
+B.prototype.b = function() {
+  console.log('B-b')
+}
+
+B.__proto__ = A
+```
+
 instanceof 与 isPrototypeOf 的区别
 
 ```js
@@ -68,4 +104,30 @@ b instanceof B // b.__proto__ === B.prototype 一直查找__proto__是否为B.pr
 B.isPrototypeOf(b) // b.__proto__ === B 一直查找 __proto__ 上的值是否为B
 
 B.prototype.isPrototypeOf(b) // 相当于 b instanceof B
+```
+
+```js
+function foo(){}
+foo.prototype = {
+  foo_prop: "foo val"
+};
+function bar(){}
+var proto = new foo;
+proto.bar_prop = "bar val";
+bar.prototype = proto;
+var inst = new bar;
+console.log(inst.foo_prop);
+console.log(inst.bar_prop);
+```
+
+类的实例化：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+```js
+// 因此，当你执行：
+
+var o = new Foo();
+// JavaScript 实际上执行的是：
+
+var o = new Object();
+o.__proto__ = Foo.prototype;
+Foo.call(o);
 ```

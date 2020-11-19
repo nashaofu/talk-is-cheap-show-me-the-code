@@ -13,5 +13,6 @@ goexec 'http.ListenAndServe(`:8080`, http.FileServer(http.Dir(`.`)))'
 
 ```bash
 # 使用tinygo编译
+# 请确保在README.md同级目录下执行该命令
 docker run --rm -v $(pwd):/src/go-webAssembly tinygo/tinygo tinygo build -o /src/go-webAssembly/wasm.wasm -target=wasm /src/go-webAssembly/main.go
 ```
