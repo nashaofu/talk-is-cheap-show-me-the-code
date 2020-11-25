@@ -2,6 +2,7 @@
 function selectionSort(arr) {
   for (let i = 0; i < arr.length - 1; i++) {
     let minIndex = i
+    console.log(arr)
     for (let j = i; j < arr.length; j++) {
       // 记住最小的数的位置
       if (arr[minIndex] > arr[j]) {
