@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YDebugger</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        color: #333;
+        min-width: 360px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      h1 {
+        padding: 0 24px;
+        margin: 16px 0;
+      }
+
+      .open-url {
+        padding: 0 24px;
+        margin: 16px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      #url {
+        width: 300px;
+        margin: 0;
+        padding: 4px 8px;
+        color: #000000;
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid #d9d9d9;
+        border-radius: 0;
+        outline: none;
+      }
+
+      #open {
+        padding: 4px 8px;
+        outline: none;
+        border: 1px solid #d9d9d9;
+        border-radius: 0;
+        font-weight: 400;
+        font-size: 14px;
+        background: #fff;
+        cursor: pointer;
+        color: #000000;
+        user-select: none;
+        margin-left: -1px;
+        transition: all 0.3s;
+      }
+
+      #url:hover,
+      #url:focus,
+      #open:hover,
+      #open:active {
+        border-color: #08f;
+        position: relative;
+        z-index: 1;
+      }
+
+      #open:hover,
+      #open:active {
+        color: #03f;
+      }
+
+      #open:active {
+        background: #f0f0f0;
+      }
+
+      #pages {
+        list-style: disc;
+        padding: 0 40px;
+        margin: 0;
+      }
+
+      #pages > li {
+        margin: 16px 0;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      .title {
+        font-size: 16px;
+      }
+
+      .url {
+        color: #777;
+        margin: 3px 0;
+      }
+
+      .footer {
+        display: flex;
+      }
+
+      .button {
+        color: #03f;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        text-decoration: underline;
+      }
+
+      .button + .button {
+        margin-left: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pages</h1>
+    <div class="open-url">
+      <input id="url" type="text" placeholder="Open tab with url" />
+      <button id="open">Open</button>
+    </div>
+    <ul id="pages">
+      loading...
+    </ul>
+    <script>
+      const $url = document.querySelector('#url')
+      const $open = document.querySelector('#open')
+      const $pages = document.querySelector('#pages')
+
+      function appendChild($el, index, tagName) {
+        let $item = $el.childNodes[index]
+
+        if (!$item) {
+          $item = document.createElement(tagName)
+          $el.appendChild($item)
+        } else if (!$item.tagName || $item.tagName.toLowerCase() !== tagName) {
+          let $newItem = document.createElement(tagName)
+          $el.replaceChild($newItem, $item)
+          $item = $newItem
+        }
+
+        return $item
+      }
+
+      function removeChild($el, index) {
+        Array.from($el.childNodes)
+          .slice(index)
+          .forEach($item => {
+            $el.removeChild($item)
+          })
+      }
+
+      // https://chromedevtools.github.io/devtools-protocol/#endpoints
+      function getPages() {
+        fetch('/json')
+          .then(res => res.json())
+          .then(devtoolsInfos => {
+            devtoolsInfos.map((item, index) => {
+              const { protocol, host } = window.location
+              const wsProtocol = protocol === 'https:' ? 'wss' : 'ws'
+              const wsUrl = `${host}/devtools/page/${item.id}`
+              const href = `/devtools/inspector.html?${wsProtocol}=${wsUrl}`
+
+              const $li = appendChild($pages, index, 'li')
+              const $title = appendChild($li, 0, 'div')
+              const $url = appendChild($li, 1, 'div')
+              const $footer = appendChild($li, 2, 'div')
+              removeChild($li, 3)
+              const $inspect = appendChild($footer, 0, 'a')
+              const $close = appendChild($footer, 1, 'a')
+              removeChild($footer, 2)
+
+              $title.classList.add('title')
+              $url.classList.add('url')
+              $footer.classList.add('footer')
+              $inspect.classList.add('button')
+              $close.classList.add('button')
+
+              $title.textContent = item.title
+              $url.textContent = item.url
+              $inspect.href = href
+              $inspect.target = '_blank'
+              $inspect.textContent = 'inspect'
+              $close.textContent = 'close'
+              $close.onclick = () => fetch(`/json/close/${item.id}`)
+            })
+            removeChild($pages, devtoolsInfos.length)
+          })
+
+        setTimeout(() => getPages(), 1000)
+      }
+
+      getPages()
+
+      $open.addEventListener('click', () => fetch(`/json/new?${$url.value}`))
+    </script>
+  </body>
+</html>
